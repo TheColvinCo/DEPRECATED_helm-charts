@@ -1,0 +1,21 @@
+{{- if .Values.varnish.enabled -}}
+{{- $name := "varnish" -}}
+{{- $data := dict "name" $name "Chart" .Chart "Release" .Release "Values" .Values -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "api.fullname" . }}-{{ $name }}
+  labels:
+    {{- include "api.labels" $data | nindent 4 }}
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"{{ include "api.fullname" . }}"}}'
+spec:
+  type: {{ .Values.varnish.service.type }}
+  ports:
+    - port: {{ .Values.varnish.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http-varnish
+  selector:
+    {{- include "api.selectorLabels" $data | nindent 4 }}
+{{- end -}}

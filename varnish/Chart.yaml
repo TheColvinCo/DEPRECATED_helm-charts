@@ -1,0 +1,17 @@
+apiVersion: v2
+description: Varnish
+name: varnish
+version: 1.0.0
+appVersion: 1.0.0
+home: https://varnish-cache.org/
+icon: https://avatars3.githubusercontent.com/u/14977495?s=200&v=4
+sources:
+  - https://github.com/varnishcache/varnish-cache
+  - https://github.com/TheColvinCo/helm-charts
+keywords:
+  - varnish
+maintainers:
+  - name: Marçal Darnaculleta
+    email: m.darnaculleta@thecolvinco.com
+  - name: Andrea De Pirro
+    email: andrea.depirro@thecolvinco.com

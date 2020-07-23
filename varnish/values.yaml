@@ -1,0 +1,36 @@
+image:
+  repository: thecolvin/varnish
+  tag: 1.0.0
+  pullPolicy: IfNotPresent
+
+service:
+  annotations: {}
+  type: NodePort
+  port: 80
+
+## Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+nodeSelector: {}
+
+## Tolerations for nodes
+tolerations: []
+
+podAnnotations: {}
+replicaCount: 1
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 512Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 512Mi
+
+extraEnvVars:
+#  - name: VALUE_FROM_SECRET
+#    valueFrom:
+#      secretKeyRef:
+#        name: secret_name
+#        key: secret_key
+#  - name: REGULAR_VAR
+#    value: ABC
