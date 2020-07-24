@@ -27,10 +27,12 @@ resources: {}
   #  memory: 512Mi
 
 extraEnvVars:
-#  - name: VALUE_FROM_SECRET
-#    valueFrom:
-#      secretKeyRef:
-#        name: secret_name
-#        key: secret_key
-#  - name: REGULAR_VAR
-#    value: ABC
+  - name: BACKEND_HOST
+    value: "api"
+  - name: ENV
+    value: "prod"
+  - name: PUBLIC_KEY
+    valueFrom:
+      secretKeyRef:
+        name: varnish
+        key: public.pem
