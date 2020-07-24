@@ -26,13 +26,8 @@ resources: {}
   #  cpu: 100m
   #  memory: 512Mi
 
-extraEnvVars:
-  - name: BACKEND_HOST
-    value: "api"
-  - name: ENV
-    value: "prod"
-  - name: PUBLIC_KEY
-    valueFrom:
-      secretKeyRef:
-        name: varnish
-        key: public.pem
+extraEnvVars: {}
+  #- name: BACKEND_HOST
+  #  value: "api"
+  #- name: ENV
+  #  value: "prod"
