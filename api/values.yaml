@@ -47,13 +47,13 @@ resources: {}
 extraEnvVars: {}
   #- name: APP_ENV
 
-volumeMounts: {}
+volumeMounts:
   - name: socket
     mountPath: /srv/socket
   #- name: shared-files
   #  mountPath: /srv/api/public
 
-volumes: {}
+volumes:
   - name: socket
     emptyDir: {}
   #- name: shared-files
