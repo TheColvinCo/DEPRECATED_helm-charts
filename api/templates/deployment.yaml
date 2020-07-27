@@ -1,0 +1,76 @@
+{{- $name := "app" -}}
+{{- $data := dict "name" $name "Chart" .Chart "Release" .Release "Values" .Values -}}
+{{- $fullName := include "api.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}-{{ $name }}
+  labels:
+    app: {{ template "api.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.nginx.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "api.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "api.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: nginx
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /nginx-health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /nginx-health
+              port: http
+          volumeMounts:
+{{- if .Values.volumeMounts }}
+{{ toYaml .Values.volumeMounts | indent 12 }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: php
+          image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.php.image.pullPolicy }}
+          env:
+{{- if .Values.php.extraEnvVars }}
+{{ toYaml .Values.php.extraEnvVars | indent 12 }}
+{{- end }}
+          volumeMounts:
+{{- if .Values.volumeMounts }}
+{{ toYaml .Values.volumeMounts | indent 12 }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+{{- if .Values.volumes }}
+{{ toYaml .Values.volumes | indent 8 }}
+{{- end }}

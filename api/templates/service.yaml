@@ -1,0 +1,22 @@
+{{- $name := "app" -}}
+{{- $data := dict "name" $name "Chart" .Chart "Release" .Release "Values" .Values -}}
+apiVersion: v1
+kind: Service
+metadata:
+  # /!\ To be reachable by Varnish, the service name MUST be hardcoded.
+  # /!\ To deploy several instances in the same namespace you MUST rename the service here and in api/docker/varnish/conf/default.vcl
+  name: {{ include "api.fullname" . }}-{{ $name }}
+  labels:
+    app: {{ template "api.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+spec:
+  type: {{ .Values.nginx.service.type }}
+  ports:
+    - port: {{ .Values.nginx.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http-nginx
+  selector:
+    app: {{ template "api.name" . }}
+    release: {{ .Release.Name }}
