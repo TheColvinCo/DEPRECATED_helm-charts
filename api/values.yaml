@@ -12,6 +12,8 @@ php:
     - 10.0.0.0/8
     - 172.16.0.0/12
     - 192.168.0.0/16
+  extraEnvVars: {}
+    #- name: APP_ENV
 
 nginx:
   image:
@@ -43,9 +45,6 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 512Mi
-
-extraEnvVars: {}
-  #- name: APP_ENV
 
 volumeMounts:
   - name: socket

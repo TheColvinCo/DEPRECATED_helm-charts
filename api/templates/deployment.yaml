@@ -49,8 +49,8 @@ spec:
           image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
           env:
-{{- if .Values.extraEnvVars }}
-{{ toYaml .Values.extraEnvVars | indent 12 }}
+{{- if .Values.php.extraEnvVars }}
+{{ toYaml .Values.php.extraEnvVars | indent 12 }}
 {{- end }}
           volumeMounts:
 {{- if .Values.volumeMounts }}
