@@ -18,5 +18,5 @@ spec:
       protocol: TCP
       name: http-varnish
   selector:
-    app: {{ template "varnish.name" . }}
+    {{ if .Values.enabled }}app: {{ template "varnish.name" . }}{{ else }}app: api{{ end }}
     release: {{ .Release.Name }}
