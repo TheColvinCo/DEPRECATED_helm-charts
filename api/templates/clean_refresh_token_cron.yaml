@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: {{ include "api.fullname" . }}-clear-refresh-tokens
 spec:
-  schedule: "0 23 * * *"
+  schedule: {{ $.Values.clean_refresh_token_cron.schedule }}
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
   jobTemplate:

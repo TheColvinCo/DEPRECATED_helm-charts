@@ -27,6 +27,7 @@ nginx:
 
 clean_refresh_token_cron:
   enabled: true
+  schedule: "0 23 * * *"
 
 ## Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
