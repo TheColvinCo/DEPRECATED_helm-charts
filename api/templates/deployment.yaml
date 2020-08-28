@@ -46,7 +46,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: php
-          image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
           env:
 {{- if .Values.php.extraEnvVars }}
@@ -62,6 +62,7 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      enableServiceLinks: false
     {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}

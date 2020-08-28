@@ -1,0 +1,13 @@
+{{- $name := "db" -}}
+{{- $data := dict "name" $name "Chart" .Chart "Release" .Release "Values" .Values -}}
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ include "api.fullname" . }}-{{ $name }}
+  labels:
+    {{- include "api.labels" $data | nindent 4 }}
+subsets:
+  - addresses:
+      - ip: {{ $.Values.ip }}
+    ports:
+      - port: {{ $.Values.port }}
