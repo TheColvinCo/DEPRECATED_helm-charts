@@ -1,8 +1,8 @@
 apiVersion: v2
 description: API Chart for db endpoint and service
 name: db
-version: 1.0.0
-appVersion: 1.0.0
+version: 1.0.1
+appVersion: 1.0.1
 home: https://www.thecolvinco.com
 icon: view-source:https://www.thecolvinco.com/favicon-192.png
 sources:
