@@ -1,9 +1,9 @@
 {{- $name := "db" -}}
-{{- $data := dict "name" $name "Chart" .Chart "Release" .Release "Values" .Values -}}
+{{- $data := dict "Chart" .Chart "Release" .Release "Values" .Values -}}
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: {{ include "db.fullname" . }}-{{ $name }}
+  name: {{ include "db.fullname" . }}
   labels:
     {{- include "db.labels" $data | nindent 4 }}
 subsets:
