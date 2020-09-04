@@ -1,0 +1,19 @@
+{{- if .Values.nginx.backendconfig -}}
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ include "api.fullname" . }}-app
+spec:
+  healthCheck:
+    checkIntervalSec: 60
+    timeoutSec: 60
+    requestPath: "/healthz"
+    #healthyThreshold: health-threshold
+    #unhealthyThreshold: unhealthy-threshold
+    #type: protocol
+  connectionDraining:
+    drainingTimeoutSec: 60
+  sessionAffinity:
+    affinityType: "CLIENT_IP"
+  timeoutSec: 60
+{{- end -}}

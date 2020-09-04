@@ -16,6 +16,7 @@ php:
     #- name: APP_ENV
 
 nginx:
+  backendconfig: true
   image:
     repository: thecolvin/nginx
     tag: "1.0.0"

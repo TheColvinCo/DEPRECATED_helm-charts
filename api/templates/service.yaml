@@ -10,6 +10,10 @@ metadata:
     app: {{ template "api.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
+  {{ if .Values.nginx.backendconfig }}
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"{{ include "api.fullname" . }}-{{ $name }}"}}'
+  {{ end }}
 spec:
   type: {{ .Values.nginx.service.type }}
   ports:
