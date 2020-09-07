@@ -21,6 +21,7 @@ nginx:
     tag: "1.0.0"
     pullPolicy: Always
   replicaCount: 1
+  backendconfig: false
   service:
     type: ClusterIP
     port: 80
