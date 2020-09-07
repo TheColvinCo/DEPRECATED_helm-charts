@@ -7,7 +7,7 @@ spec:
   healthCheck:
     checkIntervalSec: 60
     timeoutSec: 60
-    requestPath: "/healthz"
+    requestPath: "/nginx-health"
     #healthyThreshold: health-threshold
     #unhealthyThreshold: unhealthy-threshold
     #type: protocol
