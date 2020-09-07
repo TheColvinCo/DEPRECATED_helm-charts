@@ -1,8 +1,8 @@
 apiVersion: v2
 description: API Chart based on nginx and php-fpm
 name: api
-version: 2.0.0
-appVersion: 2.0.0
+version: 2.1.0
+appVersion: 2.1.0
 home: https://www.thecolvinco.com
 icon: view-source:https://www.thecolvinco.com/favicon-192.png
 sources:
