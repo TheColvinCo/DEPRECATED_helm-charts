@@ -50,7 +50,9 @@ spec:
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
           env:
 {{- if .Values.php.extraEnvVars }}
-{{ toYaml .Values.php.extraEnvVars | indent 12 }}
+{{- range $key, $value := . }}
+{{- toYaml $value | nindent 12 }}
+{{- end }}
 {{- end }}
           volumeMounts:
 {{- if .Values.volumeMounts }}
