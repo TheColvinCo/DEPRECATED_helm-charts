@@ -48,9 +48,15 @@ spec:
         - name: php
           image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
+          envFrom:
+{{- if .Values.php.envFrom }}
+{{ toYaml .Values.php.envFrom | indent 12 }}
+{{- end }}
           env:
 {{- if .Values.php.extraEnvVars }}
-{{ toYaml .Values.php.extraEnvVars | indent 12 }}
+{{- range $key, $value := . }}
+{{- toYaml $value | nindent 12 }}
+{{- end }}
 {{- end }}
           volumeMounts:
 {{- if .Values.volumeMounts }}

@@ -13,6 +13,7 @@ php:
     - 172.16.0.0/12
     - 192.168.0.0/16
   extraEnvVars: []
+  extraFrom: []
     #- name: APP_ENV
 
 nginx:
