@@ -1,4 +1,6 @@
 {{- if .Values.clean_refresh_token_cron.enabled }}
+{{- $fullName := include "api.fullname" . -}}
+
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -19,8 +21,19 @@ spec:
                 - -c
                 - bin/console gesdinet:jwt:clear "$(date '+%Y-%m-%d %H:%M:%S' -d '1 day ago')"
               env:
-{{- if .Values.php.extraEnvVars }}
-{{ toYaml .Values.php.extraEnvVars | indent 16 }}
-{{- end }}
+                {{- range $key, $val := .Values.php.extraEnvVars }}
+                - name: {{ $key }}
+                  valueFrom:
+                    configMapKeyRef:
+                      name: {{ $fullName }}
+                      key: {{ $key }}
+                {{- end }}
+                {{- range $key, $val := .Values.php.extraEnvVarsList }}
+                - name: {{ $key }}
+                  valueFrom:
+                    configMapKeyRef:
+                      name: {{ $fullName }}
+                      key: {{ $key }}
+                {{- end }}
           restartPolicy: OnFailure
 {{- end }}
