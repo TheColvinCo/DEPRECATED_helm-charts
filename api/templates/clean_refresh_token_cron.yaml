@@ -20,20 +20,14 @@ spec:
                 - /bin/sh
                 - -c
                 - bin/console gesdinet:jwt:clear "$(date '+%Y-%m-%d %H:%M:%S' -d '1 day ago')"
+              envFrom:
+{{- if .Values.php.envFrom }}
+{{ toYaml .Values.php.envFrom | indent 16 }}
+{{- end }}
               env:
                 {{- range $key, $val := .Values.php.extraEnvVars }}
                 - name: {{ $key }}
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ $fullName }}
-                      key: {{ $key }}
-                {{- end }}
-                {{- range $key, $val := .Values.php.extraEnvVarsList }}
-                - name: {{ $key }}
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ $fullName }}
-                      key: {{ $key }}
+                  value: {{ $val }}
                 {{- end }}
           restartPolicy: OnFailure
 {{- end }}

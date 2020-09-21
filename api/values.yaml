@@ -8,14 +8,9 @@ php:
     CORS_ALLOW_ORIGIN: ""
     APP_DEBUG: "0"
     APP_ENV: prod
-  extraEnvVarsList:
     TRUSTED_HOSTS: ""
-    TRUSTED_PROXIES:
-    - 10.0.0.0/8
-    - 172.16.0.0/12
-    - 192.168.0.0/16
-  extraFrom: []
-    #- name: APP_ENV
+    TRUSTED_PROXIES: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+  envFrom: {}
 
 nginx:
   image:

@@ -55,17 +55,7 @@ spec:
           env:
             {{- range $key, $val := .Values.php.extraEnvVars }}
             - name: {{ $key }}
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ $fullName }}
-                  key: {{ $key }}
-            {{- end }}
-            {{- range $key, $val := .Values.php.extraEnvVarsList }}
-            - name: {{ $key }}
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ $fullName }}
-                  key: {{ $key }}
+              value: {{ $val }}
             {{- end }}
             - name: DD_AGENT_HOST
               valueFrom:
