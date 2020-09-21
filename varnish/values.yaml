@@ -28,8 +28,7 @@ resources: {}
   #  cpu: 100m
   #  memory: 512Mi
 
+envFrom: {}
 extraEnvVars: {}
-  #- name: BACKEND_HOST
-  #  value: "api"
-  #- name: ENV
-  #  value: "prod"
+  # BACKEND_HOST: "api"
+  # ENV: "prod"

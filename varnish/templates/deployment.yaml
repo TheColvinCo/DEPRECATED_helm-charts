@@ -24,10 +24,15 @@ spec:
         - name: {{ $name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-{{- if .Values.extraEnvVars }}
-{{ toYaml .Values.extraEnvVars | indent 12 }}
+          envFrom:
+{{- if .Values.envFrom }}
+{{ toYaml .Values.envFrom | indent 12 }}
 {{- end }}
+          env:
+          {{- range $key, $val := .Values.extraEnvVars }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+          {{- end }}
           ports:
             - containerPort: 80
           livenessProbe:

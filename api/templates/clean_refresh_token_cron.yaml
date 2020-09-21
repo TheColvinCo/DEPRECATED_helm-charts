@@ -1,8 +1,10 @@
 {{- if .Values.clean_refresh_token_cron.enabled }}
+{{- $fullName := include "api.fullname" . -}}
+
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "api.fullname" . }}-clear-refresh-tokens
+  name: {{ $fullName }}-clear-refresh-tokens
 spec:
   schedule: {{ $.Values.clean_refresh_token_cron.schedule }}
   successfulJobsHistoryLimit: 0
@@ -18,9 +20,14 @@ spec:
                 - /bin/sh
                 - -c
                 - bin/console gesdinet:jwt:clear "$(date '+%Y-%m-%d %H:%M:%S' -d '1 day ago')"
-              env:
-{{- if .Values.php.extraEnvVars }}
-{{ toYaml .Values.php.extraEnvVars | indent 16 }}
+              envFrom:
+{{- if .Values.php.envFrom }}
+{{ toYaml .Values.php.envFrom | indent 16 }}
 {{- end }}
+              env:
+                {{- range $key, $val := .Values.php.extraEnvVars }}
+                - name: {{ $key }}
+                  value: {{ $val | quote }}
+                {{- end }}
           restartPolicy: OnFailure
 {{- end }}

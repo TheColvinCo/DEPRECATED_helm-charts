@@ -53,11 +53,14 @@ spec:
 {{ toYaml .Values.php.envFrom | indent 12 }}
 {{- end }}
           env:
-{{- if .Values.php.extraEnvVars }}
-{{- range $key, $value := . }}
-{{- toYaml $value | nindent 12 }}
-{{- end }}
-{{- end }}
+            {{- range $key, $val := .Values.php.extraEnvVars }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           volumeMounts:
 {{- if .Values.volumeMounts }}
 {{ toYaml .Values.volumeMounts | indent 12 }}
