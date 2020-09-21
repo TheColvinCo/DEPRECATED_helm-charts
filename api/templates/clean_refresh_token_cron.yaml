@@ -27,7 +27,7 @@ spec:
               env:
                 {{- range $key, $val := .Values.php.extraEnvVars }}
                 - name: {{ $key }}
-                  value: {{ $val }}
+                  value: {{ $val | quote }}
                 {{- end }}
           restartPolicy: OnFailure
 {{- end }}
