@@ -31,7 +31,7 @@ spec:
           env:
           {{- range $key, $val := .Values.extraEnvVars }}
             - name: {{ $key }}
-              value: {{ $val }}
+              value: {{ $val | quote }}
           {{- end }}
           ports:
             - containerPort: 80
