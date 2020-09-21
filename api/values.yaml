@@ -5,11 +5,11 @@ php:
     pullPolicy: Always
   replicaCount: 1
   extraEnvVars:
-    - CORS_ALLOW_ORIGIN: ""
-    - APP_DEBUG: "0"
-    - APP_ENV: prod
-    - TRUSTED_HOSTS: ""
-    - TRUSTED_PROXIES: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+    CORS_ALLOW_ORIGIN: ""
+    APP_DEBUG: "0"
+    APP_ENV: prod
+    TRUSTED_HOSTS: ""
+    TRUSTED_PROXIES: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
   envFrom: []
 
 nginx:
