@@ -28,7 +28,7 @@ resources: {}
   #  cpu: 100m
   #  memory: 512Mi
 
-envFrom: {}
+secretRef: {}
 extraEnvVars: {}
   # BACKEND_HOST: "api"
   # ENV: "prod"
