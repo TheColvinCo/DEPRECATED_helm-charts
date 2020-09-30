@@ -24,14 +24,17 @@ spec:
         - name: {{ $name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-{{- if .Values.envFrom }}
-{{ toYaml .Values.envFrom | indent 12 }}
-{{- end }}
           env:
           {{- range $key, $val := .Values.extraEnvVars }}
             - name: {{ $key }}
               value: {{ $val | quote }}
+          {{- end }}
+          {{- if not (empty .Values.secretRef) }}
+            - name: PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretRef }}
+                  key: PUBLIC_KEY
           {{- end }}
           ports:
             - containerPort: 80
