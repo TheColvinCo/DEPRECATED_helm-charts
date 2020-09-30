@@ -1,8 +1,8 @@
 apiVersion: v2
 description: Varnish
 name: varnish
-version: 3.0.1
-appVersion: 3.0.1
+version: 4.0.0
+appVersion: 4.0.0
 home: https://varnish-cache.org/
 icon: https://avatars3.githubusercontent.com/u/14977495?s=200&v=4
 sources:
