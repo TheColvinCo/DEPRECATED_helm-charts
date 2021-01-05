@@ -1,4 +1,3 @@
-enabled: true
 
 image:
   repository: thecolvin/varnish

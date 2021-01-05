@@ -33,11 +33,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /nginx-health
+              path: /healthz
               port: http
           readinessProbe:
             httpGet:
-              path: /nginx-health
+              path: /healthz
               port: http
           volumeMounts:
 {{- if .Values.volumeMounts }}

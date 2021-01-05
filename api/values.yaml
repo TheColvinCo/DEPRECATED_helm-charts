@@ -3,6 +3,7 @@ php:
     repository: thecolvin/php-fpm
     tag: "1.1.2"
     pullPolicy: Always
+  replicaCount: 1
   extraEnvVars:
     CORS_ALLOW_ORIGIN: ""
     APP_DEBUG: "0"
@@ -16,7 +17,7 @@ nginx:
     repository: thecolvin/nginx
     tag: "1.0.0"
     pullPolicy: Always
-  backendconfig: false
+  replicaCount: 1
   service:
     type: ClusterIP
     port: 80
@@ -24,8 +25,6 @@ nginx:
 clean_refresh_token_cron:
   enabled: true
   schedule: "0 23 * * *"
-
-replicaCount: 1
 
 ## Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
