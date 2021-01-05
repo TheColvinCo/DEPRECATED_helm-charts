@@ -1,4 +1,4 @@
 
 selector: nginx
 port: 80
-backendconfig: false
+backendconfig: true

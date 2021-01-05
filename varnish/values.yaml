@@ -6,7 +6,7 @@ image:
 
 service:
   annotations: {}
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 ## Node labels for pod assignment
