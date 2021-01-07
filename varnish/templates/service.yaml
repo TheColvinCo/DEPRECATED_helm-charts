@@ -8,8 +8,6 @@ metadata:
     app: {{ template "varnish.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
-  annotations:
-    cloud.google.com/backend-config: '{"ports": {"80":"{{ include "varnish.fullname" . }}"}}'
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -18,5 +16,5 @@ spec:
       protocol: TCP
       name: http-varnish
   selector:
-    {{ if .Values.enabled }}app: {{ template "varnish.name" . }}{{ else }}app: api{{ end }}
+    app: {{ template "varnish.name" . }}
     release: {{ .Release.Name }}

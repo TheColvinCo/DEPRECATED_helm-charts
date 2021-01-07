@@ -1,15 +1,14 @@
 apiVersion: v2
-description: Varnish
-name: varnish
-version: 5.0.0
-appVersion: 5.0.0
-home: https://varnish-cache.org/
-icon: https://avatars3.githubusercontent.com/u/14977495?s=200&v=4
+description: Ingress
+name: ingress
+version: 1.0.0
+appVersion: 1.0.0
+home: https://www.thecolvinco.com/
+icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.png
 sources:
-  - https://github.com/varnishcache/varnish-cache
   - https://github.com/TheColvinCo/helm-charts
 keywords:
-  - varnish
+  - ingress
 maintainers:
   - name: Marçal Darnaculleta
     email: m.darnaculleta@thecolvinco.com

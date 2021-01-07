@@ -1,17 +1,19 @@
+{{- if .Values.backendconfig -}}
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: {{ include "varnish.fullname" . }}
+  name: {{ .Release.Name }}-ing
 spec:
   healthCheck:
-    checkIntervalSec: 60
-    timeoutSec: 60
+    checkIntervalSec: 10
+    timeoutSec: 10
     requestPath: "/healthz"
-    #healthyThreshold: health-threshold
-    #unhealthyThreshold: unhealthy-threshold
-    #type: protocol
+    healthyThreshold: 2
+    unhealthyThreshold: 2
+    type: HTTP
   connectionDraining:
     drainingTimeoutSec: 60
   sessionAffinity:
     affinityType: "CLIENT_IP"
   timeoutSec: 60
+{{- end -}}

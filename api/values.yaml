@@ -16,7 +16,6 @@ nginx:
     repository: thecolvin/nginx
     tag: "1.0.0"
     pullPolicy: Always
-  backendconfig: false
   service:
     type: ClusterIP
     port: 80
