@@ -48,6 +48,18 @@ spec:
         - name: php
           image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
+          livenessProbe:
+            exec:
+              command:
+              - ls
+              - /srv/socket/fpm.sock
+            initialDelaySeconds: 5
+          readinessProbe:
+            exec:
+              command:
+              - ls
+              - /srv/socket/fpm.sock
+            initialDelaySeconds: 5
           envFrom:
 {{- if .Values.php.envFrom }}
 {{ toYaml .Values.php.envFrom | indent 12 }}
@@ -72,6 +84,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       enableServiceLinks: false
+      terminationGracePeriodSeconds: 60
     {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
