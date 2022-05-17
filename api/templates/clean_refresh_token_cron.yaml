@@ -1,7 +1,7 @@
 {{- if .Values.clean_refresh_token_cron.enabled }}
 {{- $fullName := include "api.fullname" . -}}
 
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ $fullName }}-clear-refresh-tokens
