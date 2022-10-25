@@ -20,6 +20,8 @@ spec:
       labels:
         app: {{ template "api.name" . }}
         release: {{ .Release.Name }}
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       containers:
         - name: nginx
